@@ -1,43 +1,23 @@
 const express = require('express');
 const Project = require('../models/project');
 const Question = require('../models/question');
-
 const router = express.Router();
+const multer = require('multer');
+const { storage } = require('../cloudinary/config');
+const Response = require('../models/response');
+const{ getAllProject, getQuestions, uploadResponse  } = require('../controllers/controller')
 
-router.post('/projects', async (req, res) => {
-    try {
-      const { project_name, project_city, project_type } = req.body;
-      const newProject = new Project({
-        project_name,
-        project_city,
-        project_type
-      });
-      const savedProject = await newProject.save();
-      res.status(201).json(savedProject);
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
-  });
+const upload = multer({ storage}) // telling to store in storage instance we created in config
 
 
-  router.get('/questions/:projectType', async (req, res) => {
-    try {
-        const { projectType } = req.params;
-        const questions = await Question.find({ type: projectType });
-        if (questions.length === 0) {
-            return res.status(404).json({ message: "No questions found for this project type." });
-        }
-        console.log(questions);
-        res.status(200).json({ questions });
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
+
+router.post('/projects', getAllProject);
 
 
-// router.post('/response', (req,res)=>{
+  router.get('/questions/:projectType', getQuestions );
 
-// })
+
+router.post('/response',upload.single('response_file'), uploadResponse )
 
 
 

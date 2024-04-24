@@ -1,9 +1,14 @@
 const express = require('express');
 const mongoose  = require('mongoose');
 const bodyParser = require('body-parser');
-
+const allRoutes = require('./routes/route')
+require('dotenv').config()
 
 const app = express();
+
+app.use(allRoutes);
+
+
 
 app.use(bodyParser.urlencoded({ extended: true}))
 
