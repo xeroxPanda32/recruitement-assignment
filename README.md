@@ -101,3 +101,106 @@ Environment Variables
 - AWSSecretKey: AWS Secret Access Key for S3.
 - AWS_REGION: AWS region for S3.
 - AWS_BUCKET_NAME: Name of the AWS S3 bucket.
+
+## Documentation
+
+### API Endpoints
+
+#### Projects
+
+- **Create Project**
+  - **URL:** `POST http://localhost:8080/createProject`
+  - **Body:**
+    ```json
+    {
+      "project_name": "test2",
+      "project_city": "delhi",
+      "project_type": "CET"
+    }
+    ```
+  - **result:**
+   ```json
+    {
+    "project_name": "test3",
+    "project_city": "delhi",
+    "project_type": "CET",
+    "questions": [
+        "662aa6358ba4b5d9326dfc32",
+        "662aa6588ba4b5d9326dfc34",
+        "662aa6748ba4b5d9326dfc36"
+    ],
+    "_id": "662b538e7a8c905eb03c7994",
+    "__v": 0
+    }
+    ```
+    
+ #### Questions
+- **Create Question**
+  - **URL:** `POST http://localhost:8080/createQuestion`
+  - **Body:**
+    ```json
+    {
+      "question_text": "What aspects of your cost analysis are you least confident in, Please elaborate?",
+      "type": "CET"
+    }
+    ```
+   - **result:**
+   ```json
+    {
+     "message": "question saved",
+     "question": {
+     "question_text": " What aspects of your cost analysis are you least confident in, Please elaborate?",
+        "type": "CET",
+        "_id": "662b54007a8c905eb03c7996",
+        "__v": 0
+    }
+
+- **Get Questions**
+  - **URL:** `GET http://localhost:8080/questions/CET`
+  - **result:**
+   ```json
+    {
+     "questions" :[{
+           "_id": "662aa6358ba4b5d9326dfc32",
+            "question_text": " How are you going to finance this project?",
+            "type": "CET",
+            "__v": 0
+     },{
+        "_id": "662aa6588ba4b5d9326dfc34",
+            "question_text": "Gross Removal & Life Cycle Analysis (LCA)",
+            "type": "CET",
+            "__v": 0
+     }]
+    }
+  
+  
+
+ #### Responses
+
+- **Upload Response**
+  - **URL:** `POST http://localhost:8080/response`
+  - **Body (form-data):**
+    - `files`: /C:/Users/user/Downloads/dummy.pdf (Attach files here)
+    - `files`: /C:/Users/user/Downloads/dummy.pdf (Attach files here)
+    - `question_id`: 662a9757b286bdd8237ed4c9
+    - `response_text`: yes I understood your terms   
+  - **result:**
+   ```json
+    {
+       "question_id": "662a9757b286bdd8237ed4c9",
+    "response_text": "yes I understood your terms",
+    "response_file": [
+        {
+            "url": "https://vericap.s3.eu-north-1.amazonaws.com/1714116102557",
+            "fileName": "dummy.pdf",
+            "_id": "662b56077a8c905eb03c7999"
+        },
+        {
+            "url": "https://vericap.s3.eu-north-1.amazonaws.com/1714116102558",
+            "fileName": "dummy.pdf",
+            "_id": "662b56077a8c905eb03c799a"
+        }
+    ],
+    "_id": "662b56077a8c905eb03c7998",
+    "__v": 0
+    }

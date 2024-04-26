@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose  = require('mongoose');
 const allRoutes = require('./routes/route')
+
 require('dotenv').config()
 
 const app = express();
@@ -11,6 +12,7 @@ app.use(express.json());
 
 // Mount all routes defined in the route file
 app.use(allRoutes);
+
 
 
 // Connect to MongoDB using the MONGO_URI from the environment variables
