@@ -9,11 +9,8 @@ const questionSchema = new mongoose.Schema({
     type: String,
     enum: ['JEE','NEET','CET'],
     required: true
-  },
-  project: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Project'
   }
+ 
   
 });
 

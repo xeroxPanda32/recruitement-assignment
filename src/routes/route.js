@@ -1,24 +1,23 @@
 const express = require('express');
-const Project = require('../models/project');
-const Question = require('../models/question');
 const router = express.Router();
-const multer = require('multer');
-const { storage } = require('../cloudinary/config');
-const Response = require('../models/response');
-const{ getAllProject, getQuestions, uploadResponse  } = require('../controllers/controller')
-
-const upload = multer({ storage}) // telling to store in storage instance we created in config
+const{ createProject, getQuestions, uploadResponse, createQuestion  } = require('../controllers/controller');
+const uploadS3 = require('../config/aws');
 
 
-
-router.post('/projects', getAllProject);
-
-
-  router.get('/questions/:projectType', getQuestions );
+// Route to create a new project
+router.post('/createproject', createProject); 
 
 
-router.post('/response',upload.single('response_file'), uploadResponse )
+// Route to create a new question
+router.post('/createquestion', createQuestion) 
 
+
+// Route to get questions based on project type
+router.get('/questions/:projectType', getQuestions );
+
+
+// Route to upload a response with file uploads using AWS S3
+router.post('/response',uploadS3.array('files'), uploadResponse )
 
 
 module.exports = router;

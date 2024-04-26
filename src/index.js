@@ -1,18 +1,20 @@
 const express = require('express');
 const mongoose  = require('mongoose');
-const bodyParser = require('body-parser');
 const allRoutes = require('./routes/route')
 require('dotenv').config()
 
 const app = express();
 
+// Middleware to parse incoming request bodies
+app.use(express.urlencoded({ extended: true}))
+app.use(express.json());
+
+// Mount all routes defined in the route file
 app.use(allRoutes);
 
 
-
-app.use(bodyParser.urlencoded({ extended: true}))
-
-mongoose.connect('mongodb://localhost:27017')
+// Connect to MongoDB using the MONGO_URI from the environment variables
+mongoose.connect(process.env.MONGO_URI)
 .then(()=>{
     app.listen(8080, ()=>{
         console.log("Ready to Start");
