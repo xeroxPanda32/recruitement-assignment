@@ -1,6 +1,23 @@
 # VeriCap
 This project is a platform for managing projects, including creating projects, adding questions, uploading responses, and handling file uploads using AWS S3.
 
+### Features
+
+- Create Project: Add new educational projects with details like name, city, and type (e.g., JEE, NEET, CET).
+- Create Question: Include new questions with text and type.
+- Get Questions: Retrieve questions based on project type for organization and preparation.
+- Upload Response: Submit responses including text and file uploads, managed using AWS S3.
+
+### Technologies Used
+
+- Node.js: Backend runtime environment.
+- Express.js: Web framework for routing.
+- MongoDB: NoSQL database for data storage.
+- Mongoose: MongoDB object modeling.
+- AWS SDK: Integration for AWS S3 file storage.
+- Multer: Middleware for file uploads.
+- Multer-S3: Multer storage engine for AWS S3.
+
 ## Table of Contents
 - Installation
 - Usage
